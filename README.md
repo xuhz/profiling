@@ -46,7 +46,7 @@ One output stack looks like,
  0xffffffff81066247 : __do_softirq+0xd7/0x240 [kernel]
  0xffffffff815a1ddc : call_softirq+0x1c/0x30 [kernel]
  0xffffffff810174b5 : do_softirq+0x65/0xa0 [kernel]
- 0xffffffff8106602d : irq_exit+0xbd/0xe0 [kernel]
+ 0xffffffff8106602d : irq_exit+0xbd/0xe0 [kernel
  0xffffffff815a2a26 : do_IRQ+0x66/0xe0 [kernel]
  0xffffffff815983ad : ret_from_intr+0x0/0x15 [kernel]
         1
@@ -60,13 +60,13 @@ root>perf script |./perfconvert.pl > kp.out
 
 One output stack looks like,
  !
-ffffffff81039e37 : smp_call_function_single_interrupt+ffffffff81039e37/
-ffffffff815a189d : call_function_single_interrupt+ffffffff815a189d/
-ffffffff814745f0 : cpuidle_enter_tk+ffffffff814745f0/
-ffffffff81473ff7 : cpuidle_enter_state+ffffffff81473ff7/
-ffffffff8147483a : cpuidle_idle_call+ffffffff8147483a/
-ffffffff8101dc5f : cpu_idle+ffffffff8101dc5f/
-ffffffff8158d511 : start_secondary+ffffffff8158d511/
+ffffffff81039e37 : smp_call_function_single_interrupt+ffffffff81039e37
+ffffffff815a189d : call_function_single_interrupt+ffffffff815a189d
+ffffffff814745f0 : cpuidle_enter_tk+ffffffff814745f0
+ffffffff81473ff7 : cpuidle_enter_state+ffffffff81473ff7
+ffffffff8147483a : cpuidle_idle_call+ffffffff8147483a
+ffffffff8101dc5f : cpu_idle+ffffffff8101dc5f
+ffffffff8158d511 : start_secondary+ffffffff8158d511
   1
 
 The stack is a little bit different that the previous stap one. The 'offset'  is actually the addr of the instruction. Maybe I

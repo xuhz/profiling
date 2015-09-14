@@ -76,4 +76,3 @@ The perf-report is not that straightforward, especially it doesn't show inclusiv
 exclusive in many cases.
 
 There are some examples showing the use cases in the begining of the post-kp.pl file.
-Some examples 

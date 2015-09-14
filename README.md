@@ -16,14 +16,13 @@ The output of the profiling is a collect of kernel stacks.
 
 Here are the examples that how stap and perf are doing kernel profiling with cpu cycles as trigger event.
 
-### for stap ###
-#root>cat stap.kp
+for stap:
+root>cat stap.kp
 #!/usr/bin/env stap 
 
 global s;
 global usermode = 0;
 
-#probe perf.sw.cpu_clock!, timer_profile {
 probe perf.hw.cpu_cycles!, timer_profile {
 	bt = user_mode();
 	if (!bt)
@@ -36,15 +35,13 @@ probe end {
 		print_stack(i);
 		printf("\t%d\n", @count(s[i]));
 	}
-#	printf("!\n");
-#	printf(" 0 : (usermode)\n%d\n", usermode);
 	printf("!\n");
 }
 
-#sudo stap -DMAXMAPENTRIES=102400 -DMAXACTION=2048000 -DMAXSKIPPED=5000 stap.kp --all-modules --ldd -c "sleep 30" --vp 00001 >kp.out
+$sudo stap -DMAXMAPENTRIES=102400 -DMAXACTION=2048000 -DMAXSKIPPED=5000 stap.kp --all-modules --ldd -c "sleep 30" --vp 00001 >kp.out
 
 One output stack looks like,
- ! 
+   ! 
  0xffffffff814cde75 : net_rx_action+0x105/0x2b0 [kernel]
  0xffffffff81066247 : __do_softirq+0xd7/0x240 [kernel]
  0xffffffff815a1ddc : call_softirq+0x1c/0x30 [kernel]
@@ -57,9 +54,9 @@ One output stack looks like,
 where,
 '!' is the separator of the stacks, and '1' is the number of times this stack appears in the whole profiling.
 
-### for perf ###
-#root>perf record -a -g -F 497 sleep 30
-#root>perf script |./perfconvert.pl > kp.out
+for perf
+root>perf record -a -g -F 497 sleep 30
+root>perf script |./perfconvert.pl > kp.out
 
 One output stack looks like,
  !

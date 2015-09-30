@@ -50,6 +50,13 @@
 #perf script |./perfconvert.pl > perf.kpstk 
 #
 #by default the HW counters used by stap and perf is cpu cycles.
+#if idle stacks are required to be shown up, this HW counter is not the one to use, because when cpu goes idle,
+#it will enter power saving mode, where no cpu cycles are burned. In this case, a HW interrupt or a x-call will
+#wake the cpu up.
+#"cpu-clock" SW event is the good one instead. With this event specified, the percentage of the idle functions is
+#consisitent to what is shown by mpstat/vmstat. The usr/sys percentage is also consistent. I prefer to use this
+#event as following,
+#perf record -a -g -e cpu-clock -F 497 sleep 30
 #
 #Examples:
 #1. Show the 'inclusive' and 'exclusive' of kernel functions.

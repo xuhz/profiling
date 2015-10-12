@@ -17,8 +17,6 @@ The output of the profiling is a collect of kernel stacks.
 Here are the examples that how stap and perf are doing kernel profiling with cpu cycles as trigger event.
 
 for stap:
-root>cat stap.kp
-#!/usr/bin/env stap 
 
 global s;
 global usermode = 0;
@@ -67,12 +65,14 @@ ffffffff81473ff7 : cpuidle_enter_state+ffffffff81473ff7
 ffffffff8147483a : cpuidle_idle_call+ffffffff8147483a
 ffffffff8101dc5f : cpu_idle+ffffffff8101dc5f
 ffffffff8158d511 : start_secondary+ffffffff8158d511
-  1
+  3
 
-The stack is a little bit different that the previous stap one. The 'offset'  is actually the addr of the instruction. Maybe I
-should consult the /proc/kallsyms and then get the real offset.
+The stack is a little bit different to that the previous stap one. The 'offset'  is actually the addr of the instruction. Maybe I should consult the /proc/kallsyms and then get the real offset.
+
+By default, the HW counter used by perf is cpu cycles. With this HW counter as the interrupt trigger, the profile will not contain the 'idle' stack since when cpu will go to power saving mode when it is idle, where the cpu does not burn cycles. The cpu will exit the power saving mode when there is a hardware interrupt or a xcall targeting this cpu happens. The above stack shoes there is a xcall arrived and it wakes up the idle cpu. Note, these kinds of stacks only count cycles consumed by xcall or interrupt, but not the percentage of idle(which reported by vmstat/mpstat). In order to also count idle stacks, the 'cpu-clock' SW event should be used instead as the perf trigger event, like following,
+root>perf record -a -g -F 497 -e "cpu-clock" sleep 30
 
 The perf-report is not that straightforward, especially it doesn't show inclusive directly, which is more informative than
 exclusive in many cases.
 
-There are some examples showing the use cases in the begining of the post-kp.pl file.
+There are some examples showing the use cases at the begining of the post-kp.pl file.

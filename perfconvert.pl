@@ -4,7 +4,7 @@
 #Convert 'perf script' output to another kernel profiling output format that
 #can feed to post-kp.pl
 #
-#this new version can aggregate the indetical stack. the perf profiling output doesn't aggregate the identical stacks,
+#this new version can aggregate the identical stack. the perf profiling output doesn't aggregate the identical stacks,
 #so the output may be very huge, especially on systems with a lot of cpus. with this new version, the size of the file
 #which feeds to post-kp.pl is dramatically reduced.
 #
@@ -19,7 +19,7 @@ while (<>) {
 	if (/^.+[\s]+[0-9]+[\s]+\[[0-9]{3}\]/) {
 		if ($newstack > 0 and $index > 1) {
 			for($i=0;$i<$index;$i++) {
-				if ($thisline[$i] =~ /^[\s]+([0-9A-Fa-f]+)[\s]+([\w]+)[\s]/) {
+				if ($thisline[$i] =~ /^[\s]+([0-9A-Fa-f]+)[\s]+([\.\w]+)[\s]/) {
 					$addr = $1;
 					$func = $2;
 					$stkline = $addr." : ".$func."+".$addr."/\n";

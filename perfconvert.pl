@@ -19,7 +19,7 @@ while (<>) {
 	if (/^.+[\s]+[0-9]+[\s]+\[[0-9]{3}\]/) {
 		if ($newstack > 0 and $index > 1) {
 			for($i=0;$i<$index;$i++) {
-				if ($thisline[$i] =~ /^[\s]+([0-9A-Fa-f]+)[\s]+([\.\w]+)[\s]/) {
+				if ($thisline[$i] =~ /^[\s]+([0-9A-Fa-f]+)[\s]+(.+)[\s]\(/) {
 					$addr = $1;
 					$func = $2;
 					$stkline = $addr." : ".$func."+".$addr."/\n";
@@ -46,7 +46,7 @@ while (<>) {
 }
 #now count the last stack
 for($i=0;$i<$index;$i++) {
-	if ($thisline[$i] =~ /^[\s]+([0-9A-Fa-f]+)[\s]+([\w]+)[\s]/) {
+	if ($thisline[$i] =~ /^[\s]+([0-9A-Fa-f]+)[\s]+(.+)[\s]\(/) {
 		$addr = $1;
 		$func = $2;
 		$stkline = $addr." : ".$func."+".$addr."/\n";

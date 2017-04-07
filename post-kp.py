@@ -148,7 +148,7 @@ class doit(object):
 					count=int(thisline[index-1])
 					for i in range(index-1):
 						fn=thisline[i]
-						fn=re.sub('^.*[:`]','',fn)
+						fn=re.sub('^.*[: |`]','',fn)
 						fn=re.sub('\/.*$','',fn)
 						inc[fn]=inc.get(fn,0)+1
 						fn=re.sub('\+.*$','',fn)
@@ -709,12 +709,12 @@ def main():
 		handle.go(args)
 	else:
 		if args.caller:
-			self.cc("caller",args.caller)
+			handle.cc("caller",args.caller)
 		elif args.callee:
-			self.cc("callee",args.callee)
+			handle.cc("callee",args.callee)
 		elif args.func:
-			self.instruction(args.func)
+			handle.instruction(args.func)
 		else:
-			self.ie(args.type)
+			handle.ie(args.type)
 		
 main()

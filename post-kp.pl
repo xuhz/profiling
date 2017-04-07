@@ -271,13 +271,9 @@ sub scan_file {
 			if ($newstack > 0 and $index > 1)  {
 				for($i=0; $i<$index-1; $i++) {
 					$func = $thisline[$i];
-					if ("$os" eq "Linux") {
-						$func =~ s/^.*: //;
-						$func =~ s/\/.*$//;
-					} else {
-						#remove 'module' info. Do we need this?
-						$func =~ s/^.*`//;
-					}
+					$func =~ s/^.*[: |`]//;
+					$func =~ s/\/.*$//;
+					
 					if (!$ncoalesce) {
 						#If in non-coalesce mode, that is, we 
 						#want to show function level info, 

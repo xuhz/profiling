@@ -619,6 +619,7 @@ class doit(object):
 										if self.fmap[k]==self.files[int(v)]:
 											v=k
 											args1.files[i]=k
+											break
 								if v not in self.fmap:
 									print('%s not opened yet, open it first!'%(v))
 									raise InvalidFile

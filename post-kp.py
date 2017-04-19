@@ -353,8 +353,8 @@ class doit(object):
 				ex_pct2=self.pct_helper(fn,self.excl[f1],self.total[f1])
 				row='%s\t%s(in:%6.2f%% ex:%6.2f%%)\t%s(in:%6.2f%% ex:%6.2f%%)'%(
 					fn,
-					self.fname[f0],in_pct1,ex_pct1,
-					self.fname[f1],in_pct2,ex_pct2)
+					self.fname[0],in_pct1,ex_pct1,
+					self.fname[1],in_pct2,ex_pct2)
 			else:
 				in_pct1=self.pct_helper(fn,self.incl[f0],self.total[f0])
 				ex_pct1=self.pct_helper(fn,self.excl[f0],self.total[f0])

@@ -18,7 +18,7 @@
 # post-kp.py -h will show the usage info and some examples.
 # 
 # The input profiling file can be from perf, dtrace, systemtap output, or
-# maybe also the ebpf(I haven't tried the ebpf profiling feature yet).
+# ebpf.
 #
 # Take perf as instance, the profiling file can be achieved in this way,
 # >perf record -a -g -F 479 sleep 30
@@ -38,6 +38,9 @@
 # are 4 billion cycles per second, so -F 479 is equivalent to -c 8000000
 #
 # sleep 30 means profiling lasts 30 seconds.
+#
+# I also tried ebpf on ubuntu 17.04 zesty. It can be used almost the same way.
+# >./profile.ebpf 30 > bfp.kp
 #
 # More explaination, refer to post-kp.pl
 #

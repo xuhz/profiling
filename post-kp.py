@@ -506,11 +506,11 @@ class doit(object):
 			options:
 				-n : number of lines displayed
 				-s : depth of call stack
-				-f : file to operate on(-f file1, or -f file1 -f file2)
+				-f : file to operate on(-f file1, or -f file1 file2)
 
 			Notes:
 				Profiling files need to be opened first before any kind of
-				post processing can be done. In theory, there is not limit
+				post processing can be done. In theory, there is no limit
 				by this tool itself on the number of files opened. Keeping
 				the file open is very convenient when the files are pretty
 				large since the pre-processed files are saved in memory, so
@@ -519,13 +519,14 @@ class doit(object):
 				Active files are those subcmds operate on if '-f' is not
 				specified by the subcmd. Active files must be subset of
 				opened files. There are at least 1 and at most 2 active files.
-				If there is 2, all those subcmds which need files are working
+				If there are 2, all those subcmds which need files are working
 				in diff mode -- the difference between 2 files is displayed.
 				By default, active files are the first 2 files opened. Then
 				afterwards, if any subcmd specifies '-f' opention, the file(s)
 				becomes the active one(s)
 
-				'ls' subcmd lists all opened and active files. 
+				'ls' subcmd lists all opened and active files. '-f' accepts
+				either the file name or the opened file index
 			''')
 
 		subcmd=['quit','ls','help','open','in','ex','ina','exa','caller',

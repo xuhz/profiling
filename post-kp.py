@@ -228,7 +228,7 @@ class doit(object):
 			if fns[0]==fn and count<= self.lines:
 				count+=1
 				if len(self.handle)==1:
-					row='%-20s\t%6.2f%%(%d)' % (k,100.0*v/self.total[0],v)
+					row='%-20s\t%6.2f%%(%d)' % (k,100.0*v/self.total[f0],v)
 				else:
 					pct1=self.pct_helper(k,self.inst[f0],self.total[f0])
 					pct2=self.pct_helper(k,self.inst[f1],self.total[f1])

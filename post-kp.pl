@@ -271,7 +271,7 @@ sub scan_file {
 			if ($newstack > 0 and $index > 1)  {
 				for($i=0; $i<$index-1; $i++) {
 					$func = $thisline[$i];
-					$func =~ s/^.*[: |`]//;
+					$func =~ s/^.*(: |`)//;
 					$func =~ s/\/.*$//;
 					
 					if (!$ncoalesce) {

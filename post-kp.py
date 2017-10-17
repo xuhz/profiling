@@ -151,7 +151,7 @@ class doit(object):
 					count=int(thisline[index-1])
 					for i in range(index-1):
 						fn=thisline[i]
-						fn=re.sub('^.*[: |`]','',fn)
+						fn=re.sub('^.*(: |`)','',fn)
 						fn=re.sub('\/.*$','',fn)
 						inc[fn]=inc.get(fn,0)+1
 						fn=re.sub('\+.*$','',fn)
